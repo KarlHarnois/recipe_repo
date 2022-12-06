@@ -20,6 +20,7 @@ RSpec.describe 'Recipe Index' do
 
     aggregate_failures do
       expect(current_path).to eq recipe_path(gravlox.id)
+      expect(page).to have_text 'Gravlox'
     end
   end
 end
