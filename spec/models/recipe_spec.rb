@@ -2,10 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Recipe do
   describe '#name' do
-    let(:recipe) { create :recipe, name: 'Test' }
+    it 'is required by the model' do
+      subject.name = nil
 
-    it 'has a name' do
-      expect(recipe.name).to eq 'Test'
+      expect(subject.valid?).to eq false
+    end
+
+    it 'is required at the database level' do
+      subject.name = nil
+
+      expect { subject.save(validate: false) }.to raise_error
     end
   end
 end
