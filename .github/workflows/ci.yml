@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres:14.5
         env:
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: test
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -35,6 +35,8 @@ jobs:
           bundler-cache: true
 
       - name: Setup database
+        env:
+          RECIPEREPOSITORY_DATABASE_PASSWORD: test
         run: bin/rails db:create db:schema:load
 
       - name: Run linter
