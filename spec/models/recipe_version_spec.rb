@@ -2,11 +2,26 @@ require 'rails_helper'
 
 RSpec.describe RecipeVersion do
   describe '#recipe' do
-    let(:version) { build :recipe_version, recipe: recipe }
     let(:recipe) { build :recipe }
 
-    it 'can be associated' do
-      expect(version.recipe).to eq recipe
+    before do
+      subject.recipe = recipe
+    end
+
+    it 'has one' do
+      expect(subject.recipe).to eq recipe
+    end
+  end
+
+  describe '#ingredients' do
+    let(:ingredient) { build :ingredient }
+
+    before do
+      subject.ingredients << ingredient
+    end
+
+    it 'has many' do
+      expect(subject.ingredients).to eq [ingredient]
     end
   end
 end

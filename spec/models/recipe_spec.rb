@@ -44,4 +44,18 @@ RSpec.describe Recipe do
       expect(subject.latest_version).to eq latest_version
     end
   end
+
+  describe '#ingredients' do
+    let(:old_version) { build :recipe_version, created_at: 3.weeks.ago }
+    let(:new_version) { build :recipe_version, created_at: 3.days.ago, ingredients: ingredients }
+    let(:ingredients) { build_list :ingredient, 2 }
+
+    before do
+      subject.versions = [old_version, new_version]
+    end
+
+    it 'returns the current ingredients' do
+      expect(subject.ingredients).to eq ingredients
+    end
+  end
 end
