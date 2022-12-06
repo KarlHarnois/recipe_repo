@@ -21,3 +21,4 @@
 /config/master.key
 
 .envrc
+.byebug_history
