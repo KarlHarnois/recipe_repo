@@ -7,4 +7,7 @@ class RecipesController < ApplicationController
       format.html
     end
   end
+
+  def show
+  end
 end

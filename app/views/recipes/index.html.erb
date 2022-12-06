@@ -10,7 +10,9 @@
   <tbody>
     <% @recipes.each do |recipe| %>
       <tr class='border-b border-slate-500'>
-        <td class='px-6 py-4 text-slate-500'><%= recipe.name %></td>
+        <td class='px-6 py-4 text-slate-500' >
+          <%= link_to recipe.name, recipe_path(recipe) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
