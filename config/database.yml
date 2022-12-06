@@ -4,14 +4,16 @@ default: &default
   pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
   username: <%= ENV.fetch('POSTGRES_USER') %>
   password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
-  database: <%= ENV.fetch('POSTGRES_DB') %>
+  database: <%= ENV.fetch('POSTGRES_DB', 'postgres') %>
   host: <%= ENV.fetch('POSTGRES_HOST') %>
 
 development:
   <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB', 'recipe_repository_development') %>
 
 test:
   <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB', 'recipe_repository_test') %>
 
 production:
   <<: *default

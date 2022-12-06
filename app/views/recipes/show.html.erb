@@ -1,0 +1,5 @@
+<% title @recipe.name %>
+
+<%= render 'table', columns: ['name'], rows: @recipe.ingredients do |ingredient| %>
+  <%= ingredient.name %>
+<% end %>

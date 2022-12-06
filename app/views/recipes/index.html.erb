@@ -1,17 +1,5 @@
 <% title 'Recipes' %>
 
-<table>
-  <thead class='border-b border-slate-500'>
-    <tr>
-      <th class='font-medium px-6 py-4 text-left'>Name</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr class='border-b border-slate-500'>
-        <td class='px-6 py-4 text-slate-500'><%= recipe.name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'table', columns: ['Name'], rows: @recipes do |recipe| %>
+  <%= link_to recipe.name, recipe_path(recipe) %>
+<% end %>
