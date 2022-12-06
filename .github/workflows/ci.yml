@@ -43,9 +43,7 @@ jobs:
           bundler-cache: true
 
       - name: Setup database
-        env:
-          RECIPEREPOSITORY_DATABASE_PASSWORD: test
-        run: bin/rails db:migrate
+        run: bundle exec rails db:schema:load
 
       - name: Run linter
         run: bundle exec rubocop
