@@ -44,12 +44,6 @@ jobs:
           bundler-cache: true
 
       - name: Setup database
-        env:
-          RAILS_ENV: ${{ env.RAILS_ENV }}
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
         run: bundle exec rails db:migrate
 
       - name: Run linter
