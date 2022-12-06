@@ -59,10 +59,4 @@ jobs:
         run: bundle exec rails tailwindcss:build
 
       - name: Run tests
-        env:
-          RAILS_ENV: ${{ env.RAILS_ENV }}
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_HOST: ${{ env.POSTGRES_HOST }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ env.POSTGRES_DB }}
         run: bundle exec rspec
