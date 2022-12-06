@@ -3,17 +3,24 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
 
     respond_to do |format|
-      format.json { render json: @recipes }
       format.html
+
+      format.json do
+        render json: @recipes,
+               adapter: :json,
+               each_serializer: SimpleRecipeSerializer
+      end
     end
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe
+      .includes(recipe_versions: { ingredients: :product })
+      .find(params[:id])
 
     respond_to do |format|
-      format.json { render json: @recipe }
       format.html
+      format.json { render json: @recipe }
     end
   end
 end
