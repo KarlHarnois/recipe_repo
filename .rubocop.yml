@@ -1,6 +1,7 @@
 AllCops:
   NewCops: enable
   Exclude:
+    - vendor/bundle/**/*
     - db/schema.rb
   TargetRubyVersion: 3.0
 
