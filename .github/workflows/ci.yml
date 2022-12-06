@@ -37,7 +37,7 @@ jobs:
       - name: Setup database
         env:
           RECIPEREPOSITORY_DATABASE_PASSWORD: test
-        run: bin/rails db:create db:schema:load
+        run: bin/rails db:migrate
 
       - name: Run linter
         run: bundle exec rubocop
