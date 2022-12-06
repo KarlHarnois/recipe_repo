@@ -24,4 +24,20 @@ RSpec.describe Recipe do
       expect(recipe.versions).to eq versions
     end
   end
+
+  describe '#current_version' do
+    let(:latest_version) { build :recipe_version, created_at: Time.now }
+
+    subject do
+      build :recipe, versions: [
+        build(:recipe_version, created_at: 1.week.ago),
+        latest_version,
+        build(:recipe_version, created_at: 1.month.ago)
+      ]
+    end
+
+    it 'returns the correct version' do
+      expect(subject.current_version).to eq latest_version
+    end
+  end
 end
