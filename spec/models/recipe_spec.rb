@@ -15,4 +15,13 @@ RSpec.describe Recipe do
         .to raise_error ActiveRecord::NotNullViolation
     end
   end
+
+  describe '#versions' do
+    let(:recipe) { create :recipe, versions: versions }
+    let(:versions) { create_list :recipe_version, 2 }
+
+    it 'can be associated' do
+      expect(recipe.versions).to eq versions
+    end
+  end
 end

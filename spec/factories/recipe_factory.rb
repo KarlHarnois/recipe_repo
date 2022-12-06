@@ -1,3 +1,5 @@
 FactoryBot.define do
-  factory :recipe
+  factory :recipe do
+    name { 'Sushi' }
+  end
 end

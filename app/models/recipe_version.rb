@@ -1,0 +1,2 @@
+class RecipeVersion < ApplicationRecord
+end
