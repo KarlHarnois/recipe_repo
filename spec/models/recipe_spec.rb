@@ -17,8 +17,8 @@ RSpec.describe Recipe do
   end
 
   describe '#versions' do
-    let(:recipe) { create :recipe, versions: versions }
-    let(:versions) { create_list :recipe_version, 2 }
+    let(:recipe) { build :recipe, versions: versions }
+    let(:versions) { build_list :recipe_version, 2 }
 
     it 'can be associated' do
       expect(recipe.versions).to eq versions
