@@ -9,9 +9,11 @@ default: &default
 
 development:
   <<: *default
+  database: recipe_repository_development
 
 test:
   <<: *default
+  database: recipe_repository_test
 
 production:
   <<: *default
