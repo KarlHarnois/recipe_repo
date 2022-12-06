@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      POSTGRES_USER: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+    services:
+      postgres:
+        image: postgres:14.5
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Pull code
+        uses: actions/checkout@v2
+
+      - name: Setup ruby & bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.0'
+          bundler-cache: true
+
+      - name: Setup database
+        run: bundle exec rails db:migrate
+
+      - name: Run linter
+        run: bundle exec rubocop
+
+      - name: Build assets
+        run: bundle exec rails tailwindcss:build
+
+      - name: Run tests
+        run: bundle exec rspec
