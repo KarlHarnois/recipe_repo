@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       format.json { render json: @recipes }
+      format.html
     end
   end
 end
