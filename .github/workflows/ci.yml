@@ -28,12 +28,13 @@ jobs:
       - name: Pull code
         uses: actions/checkout@v2
 
-      - uses: ruby/setup-ruby@v1
+      - name: Setup ruby & bundler
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.0'
           bundler-cache: true
 
-      - name: setup database
+      - name: Setup database
         run: bin/rails db:create db:schema:load
 
       - name: Run linter
