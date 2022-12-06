@@ -11,7 +11,8 @@ RSpec.describe Recipe do
     it 'is required at the database level' do
       subject.name = nil
 
-      expect { subject.save(validate: false) }.to raise_error
+      expect { subject.save(validate: false) }
+        .to raise_error ActiveRecord::NotNullViolation
     end
   end
 end
