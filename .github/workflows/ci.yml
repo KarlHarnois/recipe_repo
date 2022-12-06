@@ -55,6 +55,9 @@ jobs:
       - name: Run linter
         run: bundle exec rubocop
 
+      - name: Build assets
+        run: bundle exec rails tailwindcss::build
+
       - name: Run tests
         env:
           RAILS_ENV: ${{ env.RAILS_ENV }}
