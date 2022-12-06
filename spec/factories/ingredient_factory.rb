@@ -1,3 +1,5 @@
 FactoryBot.define do
-  factory :ingredient
+  factory :ingredient do
+    recipe_version
+  end
 end

@@ -1,3 +1,6 @@
 class Ingredient < ApplicationRecord
-  belongs_to :version, class_name: RecipeVersion.to_s
+  belongs_to :recipe_version
+  belongs_to :product
+  delegate :name, to: :product
+  alias_attribute :version, :recipe_version
 end
