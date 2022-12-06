@@ -12,9 +12,6 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    container:
-      image: ruby:3.0.0
-
     env:
       RAILS_ENV: test
 
@@ -34,17 +31,11 @@ jobs:
       - name: Pull code
         uses: actions/checkout@v2
 
-      - name: Gem cache
-        id: cache-bundle
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: bundle-${{ hashFiles('**/Gemfile.lock') }}
 
-      - name: Bundle install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
+     - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
 
       - name: setup database
         run: bin/rails db:create db:schema:load
