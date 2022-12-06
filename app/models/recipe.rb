@@ -6,4 +6,6 @@ class Recipe < ActiveRecord::Base
   def current_version
     versions.max_by(&:created_at)
   end
+
+  alias latest_version current_version
 end

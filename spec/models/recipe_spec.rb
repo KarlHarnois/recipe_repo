@@ -39,5 +39,9 @@ RSpec.describe Recipe do
     it 'returns the correct version' do
       expect(subject.current_version).to eq latest_version
     end
+
+    it 'is aliased' do
+      expect(subject.latest_version).to eq latest_version
+    end
   end
 end
