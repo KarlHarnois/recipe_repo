@@ -1,14 +1,16 @@
+<% title 'Recipes' %>
+
 <table>
-  <thead>
+  <thead class='border-b'>
     <tr>
-      <th>Name</th>
+      <th class='font-medium px-6 py-4 text-left'>Name</th>
     </tr>
   </thead>
 
   <tbody>
     <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.name %></td>
+      <tr class='border-b'>
+        <td class='px-6 py-4 text-slate-500'><%= recipe.name %></td>
       </tr>
     <% end %>
   </tbody>
