@@ -28,4 +28,16 @@ RSpec.describe Unit do
       expect(described_class.pluck(:name, :abbreviation)).to match expected
     end
   end
+
+  describe '#ingredients' do
+    let(:ingredients) { build_list :ingredient, 3 }
+
+    before do
+      subject.ingredients = ingredients
+    end
+
+    it 'has many' do
+      expect(subject.ingredients).to eq ingredients
+    end
+  end
 end
