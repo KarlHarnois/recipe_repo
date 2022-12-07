@@ -46,4 +46,14 @@ RSpec.describe Ingredient do
       expect(subject.unit).to eq unit
     end
   end
+
+  describe '#notes' do
+    before do
+      subject.notes = 'test'
+    end
+
+    it 'has some' do
+      expect(subject.notes).to eq 'test'
+    end
+  end
 end
