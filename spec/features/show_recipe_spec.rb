@@ -3,10 +3,14 @@ require 'rails_helper'
 RSpec.describe 'Show Recipe' do
   let(:recipe) { create :recipe, name: 'Greek Salad', versions: [version] }
   let(:version) { build :recipe_version, ingredients: ingredients }
-  let(:ingredients) { [cucumber, tomato, feta] }
-  let(:cucumber) { build :ingredient, product: build(:product, name: 'Cucumber') }
-  let(:tomato) { build :ingredient, product: build(:product, name: 'Tomato') }
-  let(:feta) { build :ingredient, product: build(:product, name: 'Feta') }
+
+  let(:ingredients) do
+    [
+      build(:ingredient, product: build(:product, name: 'Cucumber')),
+      build(:ingredient, product: build(:product, name: 'Tomato')),
+      build(:ingredient, product: build(:product, name: 'Feta'))
+    ]
+  end
 
   before do
     visit recipe_path(recipe)

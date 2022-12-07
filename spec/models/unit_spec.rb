@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Unit do
   describe 'db seeds' do
-    it 'includes the correct units' do
-      expect(described_class.pluck(:name, :abbreviation)).to match [
+    let(:expected) do
+      [
         %w[milliliter ml],
         %w[liter l],
         %w[teaspoon tsp],
@@ -22,6 +22,10 @@ RSpec.describe Unit do
         %w[meter m],
         %w[inch in]
       ]
+    end
+
+    it 'includes the correct units' do
+      expect(described_class.pluck(:name, :abbreviation)).to match expected
     end
   end
 end
