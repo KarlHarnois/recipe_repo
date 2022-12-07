@@ -6,9 +6,9 @@ RSpec.describe 'Show Recipe' do
 
   let(:ingredients) do
     [
-      build(:ingredient, product: build(:product, name: 'Cucumber')),
-      build(:ingredient, product: build(:product, name: 'Tomato')),
-      build(:ingredient, product: build(:product, name: 'Feta'))
+      build(:ingredient, quantity: 1, product: build(:product, name: 'Cucumber')),
+      build(:ingredient, quantity: 2.5, product: build(:product, name: 'Tomato')),
+      build(:ingredient, quantity: 10, product: build(:product, name: 'Feta'))
     ]
   end
 
@@ -18,9 +18,9 @@ RSpec.describe 'Show Recipe' do
 
   it 'displays recipes' do
     aggregate_failures do
-      expect(page).to have_text 'Cucumber'
-      expect(page).to have_text 'Tomato'
-      expect(page).to have_text 'Feta'
+      expect(page).to have_text '1 Cucumber'
+      expect(page).to have_text '2.5 Tomato'
+      expect(page).to have_text '10 Feta'
     end
   end
 end
