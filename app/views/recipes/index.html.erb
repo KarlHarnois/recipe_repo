@@ -1,5 +1,7 @@
-<% title 'Recipes' %>
+<%= render 'title', text: 'Recipes' %>
 
 <%= render 'table', columns: ['Name'], rows: @recipes do |recipe| %>
-  <%= link_to recipe.name, recipe_path(recipe) %>
+  <%= render 'td' do %>
+    <%= link_to recipe.name, recipe_path(recipe) %>
+  <% end %>
 <% end %>

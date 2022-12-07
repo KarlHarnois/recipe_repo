@@ -1,5 +1,9 @@
-<% title @recipe.name %>
+<%= render 'title', text: @recipe.name %>
 
-<%= render 'table', columns: ['name'], rows: @recipe.ingredients do |ingredient| %>
-  <%= ingredient.name %>
+<%= render 'table', columns: %w[Ingredients Quantities], rows: @recipe.ingredients do |ingredient| %>
+  <%= render 'td' do %>
+    <%= ingredient.name %>
+  <% end %>
+
+  <%= render 'td' %>
 <% end %>
