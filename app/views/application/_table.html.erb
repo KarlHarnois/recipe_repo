@@ -1,18 +1,16 @@
 <table>
   <thead class='border-b border-slate-500'>
-    <% columns.each do |column| %>
-      <tr>
-        <th class='font-medium py-4 text-left'><%= column %></th>
-      </tr>
-    <% end %>
+    <tr class='font-medium'>
+      <% columns.each do |column| %>
+        <th class='py-4 text-left'><%= column %></th>
+      <% end %>
+    </tr>
   </thead>
 
   <tbody>
     <% rows.each do |row| %>
-      <tr class='border-b border-slate-500'>
-        <td class='py-4 text-slate-500' >
-          <%= yield row %>
-        </td>
+      <tr class='border-b border-slate-500 py-4 text-slate-500'>
+        <%= yield row %>
       </tr>
     <% end %>
   </tbody>
