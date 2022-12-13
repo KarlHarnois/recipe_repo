@@ -18,9 +18,9 @@ RSpec.describe 'Show Recipe' do
 
   it 'displays recipes' do
     aggregate_failures do
-      expect(page).to have_text '1 Cucumber'
-      expect(page).to have_text '2.5 Tomato'
-      expect(page).to have_text '10 Feta'
+      expect(page).to have_text '1 cucumber'
+      expect(page).to have_text '2.5 tomatoes'
+      expect(page).to have_text '10 feta'
     end
   end
 end

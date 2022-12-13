@@ -12,7 +12,7 @@ RSpec.describe IngredientPresenter do
       end
 
       it 'drops the decimals' do
-        expect(subject.name_with_quantity).to eq '3 Banana'
+        expect(subject.name_with_quantity).to eq '3 bananas'
       end
     end
   end
