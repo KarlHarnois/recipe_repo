@@ -140,7 +140,7 @@ RSpec.describe Unit do
       let(:unit) { build :unit, name: 'teaspoon' }
 
       it 'is true' do
-        expect(unit.volume?).to eq true
+        expect(unit.volume?).to be true
       end
     end
 
@@ -148,7 +148,7 @@ RSpec.describe Unit do
       let(:unit) { build :unit, name: 'inch' }
 
       it 'is false' do
-        expect(unit.volume?).to eq false
+        expect(unit.volume?).to be false
       end
     end
 
@@ -156,7 +156,7 @@ RSpec.describe Unit do
       let(:unit) { build :unit, name: 'gram' }
 
       it 'is false' do
-        expect(unit.volume?).to eq false
+        expect(unit.volume?).to be false
       end
     end
   end
