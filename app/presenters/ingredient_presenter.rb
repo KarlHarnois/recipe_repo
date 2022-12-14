@@ -1,23 +1,23 @@
 class IngredientPresenter
   def initialize(ingredient)
     @ingredient = ingredient
-    @name_presenter = IngredientNamePresenter.new(ingredient)
   end
 
   def name_with_quantity
-    "#{quantity} #{name_presenter.downcase_name}"
+    "#{unit_with_quantity} #{downcase_name}"
   end
 
   private
 
-  attr_reader :ingredient, :name_presenter
+  attr_reader :ingredient
 
-  def quantity
-    qty = ingredient.quantity
-    decimal_quantity? ? qty : qty.to_i
+  def unit_with_quantity
+    presenter = UnitPresenterFactory.presenter_for(ingredient)
+    presenter.unit_with_quantity
   end
 
-  def decimal_quantity?
-    ingredient.quantity % 1 != 0
+  def downcase_name
+    presenter = IngredientNamePresenter.new(ingredient)
+    presenter.downcase_name
   end
 end
