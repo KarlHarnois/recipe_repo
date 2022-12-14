@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe IngredientUnitPresenter do
+RSpec.describe ImperialUnitPresenter do
   describe '#unit_with_quantity' do
     subject { described_class.new(ingredient).unit_with_quantity }
 
     let(:ingredient) { build :ingredient, unit: unit, quantity: quantity }
+    let(:unit) { build :unit, name: 'cup' }
     let(:quantity) { 1 }
 
-    context 'when unit is an imperial volume' do
-      let(:unit) { build :unit, name: 'cup' }
+    context 'when quantity has decimals' do
       let(:quantity) { 0.333333 }
 
       it 'uses fractions' do
