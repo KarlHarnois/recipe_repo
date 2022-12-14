@@ -11,15 +11,15 @@ class UnitPresenterFactory
 
   attr_reader :ingredient
 
+  delegate :unit, to: :ingredient
+
   def initialize(ingredient)
     @ingredient = ingredient
   end
 
   def presenter_class
-    if ingredient.unit.nil?
-      NullUnitPresenter
-    else
-      ImperialUnitPresenter
-    end
+    return NullUnitPresenter if unit.nil?
+
+    unit.imperial? ? ImperialUnitPresenter : MetricUnitPresenter
   end
 end

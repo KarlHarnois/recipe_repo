@@ -80,6 +80,25 @@ RSpec.describe Unit do
     end
   end
 
+  describe '.volume' do
+    let(:expected) do
+      [
+        'milliliter',
+        'liter',
+        'teaspoon',
+        'tablespoon',
+        'fluid ounce',
+        'cup',
+        'pint',
+        'gallon'
+      ]
+    end
+
+    it 'returns the correct units' do
+      expect(described_class.volume.pluck(:name)).to match expected
+    end
+  end
+
   describe 'imperial?' do
     context 'when unit is imperial' do
       let(:unit) { build :unit, name: 'cup' }
@@ -112,6 +131,32 @@ RSpec.describe Unit do
 
       it 'is true' do
         expect(unit.metric?).to be true
+      end
+    end
+  end
+
+  describe '#volume?' do
+    context 'when unit is volume' do
+      let(:unit) { build :unit, name: 'teaspoon' }
+
+      it 'is true' do
+        expect(unit.volume?).to eq true
+      end
+    end
+
+    context 'when unit is length' do
+      let(:unit) { build :unit, name: 'inch' }
+
+      it 'is false' do
+        expect(unit.volume?).to eq false
+      end
+    end
+
+    context 'when unit is weight' do
+      let(:unit) { build :unit, name: 'gram' }
+
+      it 'is false' do
+        expect(unit.volume?).to eq false
       end
     end
   end
