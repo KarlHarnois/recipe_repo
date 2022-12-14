@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 AllCops:
   NewCops: enable
   Exclude:
@@ -16,4 +18,10 @@ Style/Documentation:
   Enabled: false
 
 Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+RSpec/FactoryBot/ConsistentParenthesesStyle:
+  Enabled: false
+
+RSpec/NamedSubject:
   Enabled: false

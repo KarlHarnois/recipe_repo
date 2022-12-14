@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Recipe Index' do
-  let!(:chimichurri) { create :recipe, name: 'Chimichurri' }
   let!(:gravlox) { create :recipe, name: 'Gravlox' }
 
   before do
+    create :recipe, name: 'Chimichurri'
+
     visit recipes_path
   end
 
@@ -19,7 +20,7 @@ RSpec.describe 'Recipe Index' do
     click_link 'Gravlox'
 
     aggregate_failures do
-      expect(current_path).to eq recipe_path(gravlox.id)
+      expect(page).to have_current_path recipe_path(gravlox.id)
       expect(page).to have_text 'Gravlox'
     end
   end

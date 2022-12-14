@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe
-      .includes(recipe_versions: { ingredients: :product })
+      .includes(recipe_versions: { ingredients: %i[product unit] })
       .find(params[:id])
 
     respond_to do |format|

@@ -5,7 +5,7 @@ RSpec.describe Recipe do
     it 'is required by the model' do
       subject.name = nil
 
-      expect(subject.valid?).to eq false
+      expect(subject.valid?).to be false
     end
 
     it 'is required at the database level' do
@@ -26,8 +26,6 @@ RSpec.describe Recipe do
   end
 
   describe '#current_version' do
-    let(:latest_version) { build :recipe_version, created_at: Time.now }
-
     subject do
       build :recipe, versions: [
         build(:recipe_version, created_at: 1.week.ago),
@@ -35,6 +33,8 @@ RSpec.describe Recipe do
         build(:recipe_version, created_at: 1.month.ago)
       ]
     end
+
+    let(:latest_version) { build :recipe_version, created_at: Time.now }
 
     it 'returns the correct version' do
       expect(subject.current_version).to eq latest_version
