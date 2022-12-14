@@ -40,4 +40,79 @@ RSpec.describe Unit do
       expect(subject.ingredients).to eq ingredients
     end
   end
+
+  describe '.imperial' do
+    let(:expected) do
+      [
+        'teaspoon',
+        'tablespoon',
+        'fluid ounce',
+        'cup',
+        'pint',
+        'gallon',
+        'pound',
+        'ounce',
+        'inch'
+      ]
+    end
+
+    it 'returns the correct units' do
+      expect(described_class.imperial.pluck(:name)).to match expected
+    end
+  end
+
+  describe '.metric' do
+    let(:expected) do
+      %w[
+        milliliter
+        liter
+        milligram
+        gram
+        kilogram
+        millimeter
+        centimeter
+        meter
+      ]
+    end
+
+    it 'returns the correct units' do
+      expect(described_class.metric.pluck(:name)).to match expected
+    end
+  end
+
+  describe 'imperial?' do
+    context 'when unit is imperial' do
+      let(:unit) { build :unit, name: 'cup' }
+
+      it 'is true' do
+        expect(unit.imperial?).to be true
+      end
+    end
+
+    context 'when unit is metric' do
+      let(:unit) { build :unit, name: 'centimeter' }
+
+      it 'is false' do
+        expect(unit.imperial?).to be false
+      end
+    end
+  end
+
+  describe 'metric?' do
+    context 'when unit is imperial' do
+      let(:unit) { build :unit, name: 'cup' }
+
+      it 'is false' do
+        expect(unit.metric?).to be false
+      end
+    end
+
+    context 'when unit is metric' do
+      let(:unit) { build :unit, name: 'centimeter' }
+
+      it 'is true' do
+        expect(unit.metric?).to be true
+      end
+    end
+  end
 end
