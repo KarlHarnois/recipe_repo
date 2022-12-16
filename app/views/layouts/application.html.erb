@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class='<%= cookies[:theme] %>'>
   <head>
-    <title>recipes_repo</title>
+    <title>recipe_repo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,7 +15,7 @@
     <main class='container mx-auto mt-3 md:mt-28 px-5 flex font-mono text-slate-900 dark:text-white flex flex-col'>
       <div class='flex flex-row justify-between mb-10'>
         <%= link_to root_path do %>
-          recipes_repo
+          recipe_repo
         <% end %>
 
         <%= render partial: 'dark_mode_toggle' %>
