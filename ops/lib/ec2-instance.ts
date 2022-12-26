@@ -1,4 +1,3 @@
-import * as fs from "fs";
 import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -48,9 +47,6 @@ export class EC2Instance {
       "Allows HTTPS access from Internet"
     );
 
-    const restartHandle = new ec2.InitServiceRestartHandle();
-    const initScript = fs.readFileSync("lib/init.sh", "utf8");
-
     const instance = new ec2.Instance(scope, `${props.prefix}-ec2-instance`, {
       vpc: props.vpc,
       role: role,
@@ -64,12 +60,7 @@ export class EC2Instance {
       machineImage: ec2.MachineImage.latestAmazonLinux(),
       vpcSubnets: {
         subnetType: ec2.SubnetType.PUBLIC
-      },
-      init: ec2.CloudFormationInit.fromElements(
-        ec2.InitCommand.shellCommand(initScript, {
-          serviceRestartHandles: [restartHandle]
-        })
-      )
+      }
     });
 
     new cdk.CfnOutput(scope, `${props.prefix}-ec2-instance-output`, {
