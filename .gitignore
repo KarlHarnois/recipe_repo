@@ -27,3 +27,6 @@
 !/app/assets/builds/.keep
 
 */.DS_Store
+.DS_Store
+
+.secrets/*
