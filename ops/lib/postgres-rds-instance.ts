@@ -15,13 +15,9 @@ export interface PostgresRdsInstanceProps extends cdk.StackProps {
 
 export class PostgresRdsInstance {
   constructor(scope: Construct, props: PostgresRdsInstanceProps) {
-    const securityGroup = new ec2.SecurityGroup(
-      scope,
-      `${props.prefix}-rds-security-group`,
-      {
-        vpc: props.vpc
-      }
-    );
+    const securityGroup = new ec2.SecurityGroup(scope, `rds-security-group`, {
+      vpc: props.vpc
+    });
 
     securityGroup.addIngressRule(
       ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
@@ -44,7 +40,7 @@ export class PostgresRdsInstance {
       }
     );
 
-    new rds.DatabaseInstance(scope, `${props.prefix}-postgres-instance`, {
+    new rds.DatabaseInstance(scope, `postgres-instance`, {
       credentials: rds.Credentials.fromSecret(secret),
       engine: rds.DatabaseInstanceEngine.postgres({
         version: rds.PostgresEngineVersion.VER_14_2
