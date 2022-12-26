@@ -7,9 +7,6 @@ import { Construct } from "constructs";
 interface EC2InstanceProps {
   prefix: string;
   vpc: ec2.IVpc;
-  // dnsName: string;
-  // dbSecretName: string;
-  // wpSecretName: string;
 }
 
 export class EC2Instance {
@@ -34,19 +31,19 @@ export class EC2Instance {
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
+      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
       ec2.Port.tcp(22),
       "Allows SSH access from Internet"
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
+      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
       ec2.Port.tcp(80),
       "Allows HTTP access from Internet"
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
+      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
       ec2.Port.tcp(443),
       "Allows HTTPS access from Internet"
     );
@@ -61,9 +58,10 @@ export class EC2Instance {
         ec2.InstanceClass.T2,
         ec2.InstanceSize.MICRO
       ),
-      machineImage: ec2.MachineImage.latestAmazonLinux({
-        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2
-      })
+      machineImage: ec2.MachineImage.latestAmazonLinux(),
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.PUBLIC
+      }
     });
 
     new cdk.CfnOutput(scope, `${props.prefix}-ec2-instance-output`, {

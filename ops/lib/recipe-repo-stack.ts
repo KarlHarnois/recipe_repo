@@ -14,18 +14,17 @@ export class RecipeRepoStack extends Stack {
     super(scope, id, props);
 
     const vpc = new Vpc(this, {
-      prefix: props.projectName,
-      cidr: "172.22.0.0/16"
+      prefix: props.projectName
     });
 
-    // new PostgresRdsInstance(this, {
-    //   prefix: props.projectName,
-    //   vpc: vpc,
-    //   user: "admin",
-    //   database: `${props.projectName}-database`,
-    //   port: 3306,
-    //   secretName: `${props.projectName}/rds/postgres/credentials`
-    // });
+    new PostgresRdsInstance(this, {
+      prefix: props.projectName,
+      vpc: vpc.instance,
+      user: `recipeRepoAdmin`,
+      database: `${props.projectName}-database`,
+      port: 3306,
+      secretName: `${props.projectName}/rds/postgres/credentials`
+    });
 
     const ec2 = new EC2Instance(this, {
       prefix: props.projectName,

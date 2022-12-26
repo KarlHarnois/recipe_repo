@@ -1,9 +1,9 @@
+import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
 
-export interface VpcProps {
+export interface VpcProps extends cdk.StackProps {
   prefix: string;
-  cidr: string;
 }
 
 export class Vpc {
@@ -12,7 +12,6 @@ export class Vpc {
   constructor(scope: Construct, props: VpcProps) {
     this.instance = new ec2.Vpc(scope, `${props.prefix}-vpc`, {
       maxAzs: 2,
-      cidr: props.cidr,
       enableDnsHostnames: true,
       enableDnsSupport: true,
       natGateways: 0,
@@ -21,12 +20,12 @@ export class Vpc {
           cidrMask: 22,
           name: `${props.prefix}-public-`,
           subnetType: ec2.SubnetType.PUBLIC
+        },
+        {
+          cidrMask: 22,
+          name: `${props.prefix}-isolated-`,
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED
         }
-        // {
-        //   cidrMask: 22,
-        //   name: `${props.prefix}-isolated-`,
-        //   subnetType: ec2.SubnetType.PRIVATE_ISOLATED
-        // }
       ]
     });
   }

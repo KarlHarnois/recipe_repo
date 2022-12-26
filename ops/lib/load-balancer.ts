@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as elbv2 from "aws-cdk-lib/aws-elasticloadbalancingv2";
 
-export interface LoadBalancerProps {
+export interface LoadBalancerProps extends cdk.StackProps {
   prefix: string;
   vpc: ec2.IVpc;
 }
