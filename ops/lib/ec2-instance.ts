@@ -31,19 +31,19 @@ export class EC2Instance {
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
+      ec2.Peer.anyIpv4(),
       ec2.Port.tcp(22),
       "Allows SSH access from Internet"
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
+      ec2.Peer.anyIpv4(),
       ec2.Port.tcp(80),
       "Allows HTTP access from Internet"
     );
 
     securityGroup.addIngressRule(
-      ec2.Peer.ipv4(props.vpc.vpcCidrBlock),
+      ec2.Peer.anyIpv4(),
       ec2.Port.tcp(443),
       "Allows HTTPS access from Internet"
     );

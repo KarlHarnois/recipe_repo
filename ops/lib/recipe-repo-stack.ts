@@ -1,6 +1,5 @@
 import { Vpc } from "./vpc";
 import { PostgresRdsInstance } from "./postgres-rds-instance";
-import { LoadBalancer } from "./load-balancer";
 import { EC2Instance } from "./ec2-instance";
 import { Construct } from "constructs";
 import { StackProps, Stack } from "aws-cdk-lib";
