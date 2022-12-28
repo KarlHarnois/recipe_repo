@@ -13,4 +13,4 @@ RUN gem install bundler  -v 2.2.3
 RUN bundle install
 
 EXPOSE 9292
-ENTRYPOINT sh ./bin/entrypoint.sh
+ENTRYPOINT sh ./bin/docker-entrypoint.sh

@@ -1,14 +1,15 @@
+import * as cdk from "aws-cdk-lib";
 import { Vpc } from "./vpc";
 import { PostgresRdsInstance } from "./postgres-rds-instance";
 import { EC2Instance } from "./ec2-instance";
+import { FargateService } from "./fargate-service";
 import { Construct } from "constructs";
-import { StackProps, Stack } from "aws-cdk-lib";
 
-export interface RecipeRepoStackProps extends StackProps {
+export interface RecipeRepoStackProps extends cdk.StackProps {
   projectName: string;
 }
 
-export class RecipeRepoStack extends Stack {
+export class RecipeRepoStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: RecipeRepoStackProps) {
     super(scope, id, props);
 
@@ -16,16 +17,17 @@ export class RecipeRepoStack extends Stack {
       prefix: props.projectName
     });
 
-    new PostgresRdsInstance(this, {
+    const postgres = new PostgresRdsInstance(this, {
       prefix: props.projectName,
       vpc: vpc.instance,
-      user: `recipeRepoAdmin`,
+      username: "recipe_repo_admin",
       database: `${props.projectName}-database`,
       port: 3306,
       secretName: `${props.projectName}/rds/postgres/credentials`
     });
 
-    const ec2 = new EC2Instance(this, {
+    new FargateService(this, {
+      databaseSecret: postgres.secret,
       prefix: props.projectName,
       vpc: vpc.instance
     });

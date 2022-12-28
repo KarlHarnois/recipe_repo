@@ -28,5 +28,61 @@ export class Vpc {
         }
       ]
     });
+
+    this.setupInterfaceVpcEndpoints();
+  }
+
+  private setupInterfaceVpcEndpoints(): void {
+    this.addInterfaceEndpoint(
+      "ECRDockerEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.ECR_DOCKER
+    );
+
+    this.addInterfaceEndpoint(
+      "ECREndpoint",
+      ec2.InterfaceVpcEndpointAwsService.ECR
+    );
+
+    this.addInterfaceEndpoint(
+      "SecretManagerEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.SECRETS_MANAGER
+    );
+
+    this.addInterfaceEndpoint(
+      "CloudWatchEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH
+    );
+
+    this.addInterfaceEndpoint(
+      "CloudWatchLogsEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_LOGS
+    );
+
+    this.addInterfaceEndpoint(
+      "CloudWatchEventsEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.CLOUDWATCH_EVENTS
+    );
+
+    this.addInterfaceEndpoint(
+      "SSMEndpoint",
+      ec2.InterfaceVpcEndpointAwsService.SSM
+    );
+  }
+
+  private addInterfaceEndpoint(
+    name: string,
+    awsService: ec2.InterfaceVpcEndpointAwsService
+  ): void {
+    const endpoint: ec2.InterfaceVpcEndpoint = this.instance.addInterfaceEndpoint(
+      `${name}`,
+      {
+        service: awsService
+      }
+    );
+
+    endpoint.connections.allowFrom(
+      ec2.Peer.ipv4(this.instance.vpcCidrBlock),
+      endpoint.connections.defaultPort!
+    );
   }
 }
